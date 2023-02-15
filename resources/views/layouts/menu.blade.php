@@ -1,7 +1,7 @@
 <li class="nav-item">
     <a href="{{ route('klantens.index') }}"
        class="nav-link {{ Request::is('klantens*') ? 'active' : '' }}">
-        <p>Klantens</p>
+        <p>Klanten</p>
     </a>
 </li>
 
@@ -12,5 +12,14 @@
         <p>Leveranciers</p>
     </a>
 </li>
+
+@can('role',['admin'])
+<li class="nav-item">
+    <a href="{{ route('users.index') }}"
+       class="nav-link {{ Request::is('users*') ? 'active' : '' }}">
+        <p>Users</p>
+    </a>
+</li>
+@endcan
 
 

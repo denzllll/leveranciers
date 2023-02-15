@@ -26,3 +26,6 @@ Route::resource('klantens', 'klantenController');
 
 
 Route::resource('leveranciers', 'leveranciersController');
+
+
+Route::resource('users', 'UsersController')->middleware('can:role,"admin"');

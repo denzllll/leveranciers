@@ -8,7 +8,6 @@
         <th>Directeur</th>
         <th>Telefoonnummer</th>
         <th>Website</th>
-        <th>Deleted By</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -21,7 +20,6 @@
             <td>{{ $leveranciers->directeur }}</td>
             <td>{{ $leveranciers->telefoonnummer }}</td>
             <td>{{ $leveranciers->website }}</td>
-            <td>{{ $leveranciers->deleted_by }}</td>
                 <td width="120">
                     {!! Form::open(['route' => ['leveranciers.destroy', $leveranciers->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
