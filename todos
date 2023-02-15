@@ -1,0 +1,24 @@
+Schrijf een applicatie gegevens over leveranciers en klanten opgeslagen kunnen worden.
+Je moet de leveranciers en klanten kunnen bekijken, toevoegen, bewerken en verwijderen.
+Let wel dat er ook een mogelijkheid moet zijn om de verwijderde klanten en leveranciers terug te zien en terug te zetten.
+
+Verder moet de applicatie beveiligd zijn d.m.v. een login.
+
+De gegevens van de leveranciers die wij graag willen hebben zijn:
+•	Bedrijfsnaam
+•	Adres
+•	District
+•	Directeur
+•	Telefoonnummer
+•	Website
+De gegevens van de klanten die wij graag willen hebben zijn:
+•	Voornaam
+•	Achternaam
+•	Geslacht
+•	Adres en huisnummer
+•	District
+•	Telefoonnummer
+•	Email
+Let wel erop dat het gebruiksvriendelijk en dat het vooral "dummy proof" is.
+Voorbeeld: In een veld wil ik alleen cijfers maar een gebruiker probeert letters toe te voegen.
+ De letters moeten niet ingevoerd worden of de gebruiker krijgt een error melding.
