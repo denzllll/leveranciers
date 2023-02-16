@@ -25,7 +25,7 @@
 <!-- Telefoonnummer Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('telefoonnummer', 'Telefoonnummer:') !!}
-    {!! Form::text('telefoonnummer', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
+    {!! Form::number('telefoonnummer', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
 <!-- Website Field -->
@@ -34,9 +34,4 @@
     {!! Form::text('website', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
 
-<!-- Deleted By Field -->
-<div class="form-group col-sm-6">
-    {!! Form::label('deleted_by', 'Deleted By:') !!}
-    {!! Form::text('deleted_by', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
-</div>
 

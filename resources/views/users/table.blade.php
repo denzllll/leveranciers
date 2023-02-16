@@ -17,13 +17,13 @@
                 <td width="120">
                     {!! Form::open(['route' => ['users.destroy', $users->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('users.show', [$users->id]) }}" class='btn btn-default btn-xs'>
+                        <a href="{{ route('users.show', [$users->id]) }}" class='btn btn-default btn-s'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('users.edit', [$users->id]) }}" class='btn btn-default btn-xs'>
+                        <a href="{{ route('users.edit', [$users->id]) }}" class='btn btn-default btn-s'>
                             <i class="far fa-edit"></i>
                         </a>
-                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                        {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-s', 'onclick' => "return confirm('Are you sure?')"]) !!}
                     </div>
                     {!! Form::close() !!}
                 </td>

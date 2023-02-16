@@ -10,7 +10,7 @@
                 <div class="col-sm-6">
                     <a class="btn btn-primary float-right"
                        href="{{ route('users.create') }}">
-                        Add New
+                       <i class="fas fa-solid fa-plus"></i> Add New
                     </a>
                 </div>
             </div>
@@ -29,7 +29,7 @@
 
                 <div class="card-footer clearfix float-right">
                     <div class="float-right">
-                        
+
                     </div>
                 </div>
             </div>

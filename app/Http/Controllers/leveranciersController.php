@@ -9,6 +9,8 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Illuminate\Support\Facades\DB;
+
 
 class leveranciersController extends AppBaseController
 {
@@ -29,7 +31,11 @@ class leveranciersController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $leveranciers = $this->leveranciersRepository->all();
+        // $leveranciers = $this->leveranciersRepository->all();
+        $leveranciers = DB::table('leveranciers')
+            ->where('deleted_at', null)
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
 
         return view('leveranciers.index')
             ->with('leveranciers', $leveranciers);
@@ -152,5 +158,46 @@ class leveranciersController extends AppBaseController
         Flash::success('Leveranciers deleted successfully.');
 
         return redirect(route('leveranciers.index'));
+    }
+
+    public function restoreIndex()
+    {
+        // var_dump('sdasd');
+        // exit();
+        $leveranciers = DB::table('leveranciers')
+            ->where('deleted_at',"!=" ,null)
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
+
+
+        return view('leveranciers.index')
+            ->with('leveranciers', $leveranciers);
+    }
+
+    public function restoreShow($id){
+        $leveranciers = $this->leveranciersRepository->find($id);
+
+        $leveranciers = DB::table('leveranciers')
+        ->where('id',$id)
+        ->get();
+
+        if (empty($leveranciers)) {
+            Flash::error('Leveranciers not found');
+
+            return redirect(route('leveranciers.index'));
+        }
+
+        return view('leveranciers.show')->with('leveranciers', $leveranciers[0]);
+    }
+
+    public function restoreBack($id){
+        $leveranciers = DB::table('leveranciers')
+        ->where('id' ,$id)
+        ->update([
+            'deleted_at' => NULL
+        ]);
+        Flash::success('Restored successfully.');
+
+        return redirect(route('leveranciers.restoreIndex'));
     }
 }

@@ -9,6 +9,8 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Illuminate\Support\Facades\DB;
+
 
 class klantenController extends AppBaseController
 {
@@ -29,7 +31,11 @@ class klantenController extends AppBaseController
      */
     public function index(Request $request)
     {
-        $klantens = $this->klantenRepository->all();
+        // $klantens = $this->klantenRepository->all();
+        $klantens = DB::table('klanten')
+        ->where('deleted_at',null)
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
 
         return view('klantens.index')
             ->with('klantens', $klantens);
@@ -152,5 +158,48 @@ class klantenController extends AppBaseController
         Flash::success('Klanten deleted successfully.');
 
         return redirect(route('klantens.index'));
+    }
+
+    public function restoreIndex()
+    {
+        // var_dump('sdasd');
+        // exit();
+        $klantens = DB::table('klanten')
+            ->where('deleted_at',"!=" ,null)
+            ->orderBy('created_at', 'desc')
+            ->paginate(9);
+
+
+            return view('klantens.index')
+            ->with('klantens', $klantens);
+    }
+
+    public function restoreShow($id){
+        $klanten = $this->klantenRepository->find($id);
+
+
+        $klanten = DB::table('klanten')
+        ->where('id',$id)
+        ->get();
+
+        if (empty($klanten)) {
+            Flash::error('Klanten not found');
+
+            return redirect(route('klantens.index'));
+        }
+
+        return view('klantens.show')->with('klanten', $klanten[0]);
+
+    }
+
+    public function restoreBack($id){
+        $leveranciers = DB::table('klanten')
+        ->where('id' ,$id)
+        ->update([
+            'deleted_at' => NULL
+        ]);
+        Flash::success('Restored successfully.');
+
+        return redirect(route('klanten.restoreIndex'));
     }
 }

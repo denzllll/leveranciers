@@ -8,10 +8,17 @@
                     <h1>Klanten Details</h1>
                 </div>
                 <div class="col-sm-6">
+                    @if(!Illuminate\Support\Str::contains(request()->url(), 'restore-klanten'))
                     <a class="btn btn-default float-right"
                        href="{{ route('klantens.index') }}">
-                        Back
+                       <i class="fas fa-solid fa-arrow-left"></i>   Back
                     </a>
+                @else
+                <a class="btn btn-default float-right"
+                       href="{{ route('klanten.restoreIndex') }}">
+                       <i class="fas fa-solid fa-arrow-left"></i>  Back
+                    </a>
+                @endif
                 </div>
             </div>
         </div>

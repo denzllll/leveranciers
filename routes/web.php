@@ -32,3 +32,11 @@ Route::resource('leveranciers', 'leveranciersController');
 
 
 Route::resource('users', 'UsersController')->middleware('can:role,"admin"');
+
+Route::get('/restore-leveranciers', 'leveranciersController@restoreIndex')->name('leveranciers.restoreIndex');
+Route::get('/restore-leveranciers/{id}/restoreShow', 'leveranciersController@restoreShow')->name('leveranciers.restoreShow');
+Route::post('/restore-leveranciers/{id}/restoreBack', 'leveranciersController@restoreBack')->name('leveranciers.restoreBack');
+
+Route::get('/restore-klanten', 'klantenController@restoreIndex')->name('klanten.restoreIndex');
+Route::get('/restore-klanten/{id}/restoreShow', 'klantenController@restoreShow')->name('klanten.restoreShow');
+Route::post('/restore-klanten/{id}/restoreBack', 'klantenController@restoreBack')->name('klanten.restoreBack');
