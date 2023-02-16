@@ -22,7 +22,7 @@ class Users extends Model
     use SoftDeletes;
 
     public $table = 'users';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -65,12 +65,12 @@ class Users extends Model
         'email' => 'required|string|max:255',
         'role' => 'required|string|max:255',
         'email_verified_at' => 'nullable',
-        'password' => 'required|string|max:255',
+        // 'password' => 'required|string|max:255',
         'remember_token' => 'nullable|string|max:100',
         'created_at' => 'nullable',
         'updated_at' => 'nullable',
         'deleted_at' => 'nullable'
     ];
 
-    
+
 }

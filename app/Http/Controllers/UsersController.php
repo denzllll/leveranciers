@@ -9,6 +9,8 @@ use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends AppBaseController
 {
@@ -55,12 +57,28 @@ class UsersController extends AppBaseController
     public function store(CreateUsersRequest $request)
     {
         $input = $request->all();
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'password-retype' => 'required',
+            'role' => 'required',
+        ]);
+        if ($input['password'] != $input['password-retype']) {
+            Flash::error('The password confirmation does not match.');
+        } else {
+            $input =  ([
+                'name' => $input['name'],
+                'email' => $input['email'],
+                'password' => Hash::make($input['password']),
+                'role' => $input['role'],
+                '_token' => $input['_token']
+            ]);
+            $users = $this->usersRepository->create($input);
 
-        $users = $this->usersRepository->create($input);
-
-        Flash::success('Users saved successfully.');
-
-        return redirect(route('users.index'));
+            Flash::success('Users saved successfully.');
+            return redirect(route('users.index'));
+        }
     }
 
     /**
@@ -93,6 +111,8 @@ class UsersController extends AppBaseController
     public function edit($id)
     {
         $users = $this->usersRepository->find($id);
+        // var_dump($users);
+        // exit();
 
         if (empty($users)) {
             Flash::error('Users not found');
@@ -115,15 +135,37 @@ class UsersController extends AppBaseController
     {
         $users = $this->usersRepository->find($id);
 
+        $req = $request->all();
+
+        if ($req['password'] == NULL) {
+            //  echo 'asdasd';
+            $request['password'] = $users->password;
+            Flash::success('Users updated successfully.');
+        } else {
+            if ($request['password'] != $request['password-retype']) {
+                Flash::error('The password confirmation does not match.');
+            } else {
+                $request->validate([
+                    'name' => 'required',
+                    'email' => 'required',
+                    'password' => 'required',
+                    'password-retype' => 'required',
+                    'role' => 'required',
+                ]);
+                $request['password']  = Hash::make($request['password']);
+                Flash::success('Users updated successfully.');
+            }
+        }
+
         if (empty($users)) {
             Flash::error('Users not found');
 
             return redirect(route('users.index'));
         }
 
+
         $users = $this->usersRepository->update($request->all(), $id);
 
-        Flash::success('Users updated successfully.');
 
         return redirect(route('users.index'));
     }

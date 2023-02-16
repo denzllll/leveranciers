@@ -39,3 +39,4 @@
     {!! Form::label('deleted_by', 'Deleted By:') !!}
     {!! Form::text('deleted_by', null, ['class' => 'form-control','maxlength' => 255,'maxlength' => 255]) !!}
 </div>
+
