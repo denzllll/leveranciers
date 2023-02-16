@@ -12,23 +12,23 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($leveranciers as $leveranciers)
+        @foreach($leveranciers as $leverancier)
             <tr>
-                <td>{{ $leveranciers->bedrijfsnaam }}</td>
-            <td>{{ $leveranciers->adres }}</td>
-            <td>{{ $leveranciers->district }}</td>
-            <td>{{ $leveranciers->directeur }}</td>
-            <td>{{ $leveranciers->telefoonnummer }}</td>
-            <td>{{ $leveranciers->website }}</td>
+                <td>{{ $leverancier->bedrijfsnaam }}</td>
+            <td>{{ $leverancier->adres }}</td>
+            <td>{{ $leverancier->district }}</td>
+            <td>{{ $leverancier->directeur }}</td>
+            <td>{{ $leverancier->telefoonnummer }}</td>
+            <td>{{ $leverancier->website }}</td>
             @if (request()->path() !== 'restore-leveranciers')
 
                 <td width="120">
-                    {!! Form::open(['route' => ['leveranciers.destroy', $leveranciers->id], 'method' => 'delete']) !!}
+                    {!! Form::open(['route' => ['leveranciers.destroy', $leverancier->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('leveranciers.show', [$leveranciers->id]) }}" class='btn btn-default btn-s'>
+                        <a href="{{ route('leveranciers.show', [$leverancier->id]) }}" class='btn btn-default btn-s'>
                             <i class="far fa-eye"></i>
                         </a>
-                        <a href="{{ route('leveranciers.edit', [$leveranciers->id]) }}" class='btn btn-default btn-s'>
+                        <a href="{{ route('leveranciers.edit', [$leverancier->id]) }}" class='btn btn-default btn-s'>
                             <i class="far fa-edit"></i>
                         </a>
                         {!! Form::button('<i class="far fa-trash-alt"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-s', 'onclick' => "return confirm('Are you sure?')"]) !!}
@@ -38,9 +38,9 @@
 
                 @else
                 <td width="120">
-                    {!! Form::open(['route' => ['leveranciers.restoreBack', $leveranciers->id], 'method' => 'post']) !!}
+                    {!! Form::open(['route' => ['leveranciers.restoreBack', $leverancier->id], 'method' => 'post']) !!}
                     <div class='btn-group'>
-                        <a href="{{ route('leveranciers.restoreShow', [$leveranciers->id]) }}" class='btn btn-default btn-s'>
+                        <a href="{{ route('leveranciers.restoreShow', [$leverancier->id]) }}" class='btn btn-default btn-s'>
                             <i class="far fa-eye"></i>
                         </a>
                         {!! Form::button('<i class="fas fa-trash-restore"></i>', ['type' => 'submit', 'class' => 'btn btn-warning btn-s', 'onclick' => "return confirm('Are you sure?')"]) !!}
@@ -52,4 +52,8 @@
         @endforeach
         </tbody>
     </table>
+    <div class="d-flex justify-content-end" style="padding-right:3%">
+    {!! $leveranciers->links() !!}
+</div>
+
 </div>

@@ -35,7 +35,7 @@ class leveranciersController extends AppBaseController
         $leveranciers = DB::table('leveranciers')
             ->where('deleted_at', null)
             ->orderBy('created_at', 'desc')
-            ->paginate(9);
+            ->paginate(10);
 
         return view('leveranciers.index')
             ->with('leveranciers', $leveranciers);

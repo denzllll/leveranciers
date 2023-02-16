@@ -35,8 +35,5 @@
 </div>
 
 <!-- Deleted By Field -->
-<div class="col-sm-12">
-    {!! Form::label('deleted_by', 'Deleted By:') !!}
-    <p>{{ $leveranciers->deleted_by }}</p>
-</div>
+
 

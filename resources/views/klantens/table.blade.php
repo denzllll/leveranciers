@@ -53,4 +53,7 @@
         @endforeach
         </tbody>
     </table>
+    <div class="d-flex justify-content-end" style="padding-right:3%">
+    {!! $klantens->links() !!}
+</div>
 </div>
